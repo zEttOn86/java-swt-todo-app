@@ -4,6 +4,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.todo.app.views.Body;
 import com.todo.app.views.Header;
 
 /**
@@ -39,6 +40,7 @@ public class TodoApp
         Header header = new Header(shell);
 
         // Body composite
+        Body body = new Body(shell);
 
 
         shell.open();
