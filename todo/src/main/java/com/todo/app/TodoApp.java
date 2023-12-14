@@ -4,6 +4,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.todo.app.views.Header;
+
 /**
  * Hello world!
  *
@@ -29,11 +31,12 @@ public class TodoApp
     private Shell open(Display display){
         Shell shell = new Shell(display);
         shell.setLayout(new GridLayout(1, false)); // makeColumnsEqualWidth: 列をすべて同じ幅にするかどうか、trueの場合同じ
-        
+
         // Set title
         shell.setText("TODOリスト");
 
         // Header composite
+        Header header = new Header(shell);
 
         // Body composite
 
