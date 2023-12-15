@@ -4,6 +4,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.todo.app.events.SavingBtnAdapter;
+import com.todo.app.utils.TodoList;
 import com.todo.app.views.Body;
 import com.todo.app.views.Header;
 
@@ -14,6 +16,7 @@ import com.todo.app.views.Header;
 public class TodoApp 
 {
 
+    private TodoList todoList;
     public static void main(String[] args) {
 
         Display display = new Display(); // アプリが OS に問い合わせる窓口
@@ -30,6 +33,8 @@ public class TodoApp
     }
 
     private Shell open(Display display){
+        this.todoList = new TodoList();
+
         Shell shell = new Shell(display);
         shell.setLayout(new GridLayout(1, false)); // makeColumnsEqualWidth: 列をすべて同じ幅にするかどうか、trueの場合同じ
 
@@ -41,6 +46,10 @@ public class TodoApp
 
         // Body composite
         Body body = new Body(shell);
+
+        header.todoSavingBtn.addSelectionListener(
+            new SavingBtnAdapter(header.todoText,
+                                 todoList));
 
 
         shell.open();

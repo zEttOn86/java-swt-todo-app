@@ -17,6 +17,7 @@ import com.todo.app.TodoApp;
 public class Header {
     
     public Button todoSavingBtn;
+    public StyledText todoText;
     
     private Shell shell;
     
@@ -46,7 +47,7 @@ public class Header {
                                 1);
         titleLabel.setLayoutData(gridData);
 
-        StyledText todoText = new StyledText(c1, SWT.SINGLE | SWT.BORDER);
+        todoText = new StyledText(c1, SWT.SINGLE | SWT.BORDER);
         Font todoFont = new Font(todoText.getDisplay(),
                                  new FontData("Meiryo", 15, SWT.NONE));
         todoText.setFont(todoFont);
