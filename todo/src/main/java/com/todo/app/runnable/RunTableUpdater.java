@@ -25,14 +25,15 @@ public class RunTableUpdater implements Runnable {
 
     public void run(){
         while(true){
-            // System.out.println("ddddddd");
-            // if(shouldTerminate.get()==true){
-            //     break;
-            // }
+
+            if(display.isDisposed()){
+               return; 
+            }
+
+            // テーブルを更新する必要があれば、テーブルを更新する
             if(shouldUpdate.get()==false){
                 continue;
             }
-
             shouldUpdate.set(false);
             new Thread(new TableUpdater(display, table, todoList)).start();
         }
