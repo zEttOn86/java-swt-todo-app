@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
 import com.todo.app.TodoApp;
+import com.todo.app.events.DoneTodoBtnAdapter;
 import com.todo.app.utils.TodoItem;
 
 public class TableRow {
@@ -29,6 +30,7 @@ public class TableRow {
         doneTodoEditor.minimumHeight = doneBtnSize.y;
         // Set the editor for the first column in the row
         doneTodoEditor.setEditor(doneTodoBtn, item, 2);
+        doneTodoBtn.addSelectionListener(new DoneTodoBtnAdapter(item));
 
         // Create the editor and button
         TableEditor delTodoEditor = new TableEditor(table);
