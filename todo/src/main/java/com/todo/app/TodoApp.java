@@ -1,10 +1,13 @@
 package com.todo.app;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.todo.app.events.SavingBtnAdapter;
+import com.todo.app.runnable.RunTableUpdater;
 import com.todo.app.utils.TodoList;
 import com.todo.app.views.Body;
 import com.todo.app.views.Header;
@@ -16,7 +19,9 @@ import com.todo.app.views.Header;
 public class TodoApp 
 {
 
-    private TodoList todoList;
+    private TodoList todoList = new TodoList();
+    private AtomicBoolean shouldUpdate = new AtomicBoolean(false);
+
     public static void main(String[] args) {
 
         Display display = new Display(); // アプリが OS に問い合わせる窓口
@@ -49,9 +54,13 @@ public class TodoApp
 
         header.todoSavingBtn.addSelectionListener(
             new SavingBtnAdapter(header.todoText,
-                                 todoList));
+                                 todoList,
+                                 shouldUpdate));
 
-
+        new Thread(new RunTableUpdater(display, 
+                                       body.table,
+                                       todoList,
+                                       shouldUpdate)).start();
         shell.open();
         return shell;
     }

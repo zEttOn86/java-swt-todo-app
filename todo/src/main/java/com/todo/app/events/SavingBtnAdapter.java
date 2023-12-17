@@ -1,5 +1,8 @@
 package com.todo.app.events;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,9 +14,11 @@ import com.todo.app.utils.TodoList;
 public class SavingBtnAdapter extends SelectionAdapter  {
     private StyledText todoText;
     private TodoList todoList;
-    public SavingBtnAdapter(StyledText text, TodoList todoList){
+    private AtomicBoolean shouldUpdate;
+    public SavingBtnAdapter(StyledText text, TodoList todoList, AtomicBoolean shouldUpdate){
         this.todoText = text;
         this.todoList = todoList;
+        this.shouldUpdate = shouldUpdate;
     }
 
     public void widgetSelected(SelectionEvent e) {
@@ -25,6 +30,7 @@ public class SavingBtnAdapter extends SelectionAdapter  {
             return;
         }
         todoList.add(new TodoItem(txt));
+        shouldUpdate.set(true);
         // System.out.println(todoList);
     }
 }

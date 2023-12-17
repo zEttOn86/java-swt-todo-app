@@ -3,7 +3,7 @@ package com.todo.app.utils;
 import java.util.ArrayList;
 
 public class TodoList {
-    private ArrayList<TodoItem> todoList;
+    public ArrayList<TodoItem> todoList;
     public TodoList(){
         todoList = new ArrayList<TodoItem>();
     }
