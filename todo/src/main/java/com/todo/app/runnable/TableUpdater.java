@@ -44,10 +44,8 @@ public class TableUpdater implements Runnable {
                     }
 
                     // テーブルを再描画
-                    int index = 0;
-                    for(TodoItem t : todoList.todoList){
-                        index++;
-                        new TableRow(table, index, t, todoList, shouldUpdate);
+                    for(int i = 0; i < todoList.length(); i++){
+                        new TableRow(table, todoList, i, shouldUpdate);
                     }
                 }
             }

@@ -21,4 +21,10 @@ public class TodoList {
         // new Thread(new ComboUpdater()).start();
         //do other things you want to do when items are removed
     }
+    public int length(){
+        return todoList.size();
+    }
+    public TodoItem getItem(int index){
+        return todoList.get(index);
+    }
 }
