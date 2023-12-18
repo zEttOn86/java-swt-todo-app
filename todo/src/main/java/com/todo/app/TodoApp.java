@@ -47,15 +47,10 @@ public class TodoApp
         shell.setText("TODOリスト");
 
         // Header composite
-        Header header = new Header(shell);
+        Header header = new Header(shell, todoList, shouldUpdate);
 
         // Body composite
         Body body = new Body(shell);
-
-        header.todoSavingBtn.addSelectionListener(
-            new SavingBtnAdapter(header.todoText,
-                                 todoList,
-                                 shouldUpdate));
 
         new Thread(new RunTableUpdater(body.table,
                                        todoList,
