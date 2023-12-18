@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.todo.app.events.SavingBtnAdapter;
-import com.todo.app.runnable.RunTableUpdater;
+import com.todo.app.runnable.RefreshTableThread;
 import com.todo.app.utils.TodoList;
 import com.todo.app.views.Body;
 import com.todo.app.views.Header;
@@ -52,9 +52,9 @@ public class TodoApp
         // Body composite
         Body body = new Body(shell);
 
-        new Thread(new RunTableUpdater(body.table,
-                                       todoList,
-                                       shouldUpdate)).start();
+        new Thread(new RefreshTableThread(body.table,
+                                          todoList,
+                                          shouldUpdate)).start();
         shell.open();
         return shell;
     }
