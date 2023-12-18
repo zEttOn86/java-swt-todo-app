@@ -1,5 +1,7 @@
 package com.todo.app.runnable;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.swing.text.TabExpander;
 
 import org.eclipse.swt.widgets.Button;
@@ -16,11 +18,13 @@ public class TableUpdater implements Runnable {
     private Display display;
     private Table table;
     private TodoList todoList;
+    private final AtomicBoolean shouldUpdate;
 
-    public TableUpdater(Display display, Table table, TodoList todoList){
+    public TableUpdater(Display display, Table table, TodoList todoList, AtomicBoolean shouldUpdate){
         this.display = display;
         this.table = table;
         this.todoList = todoList;
+        this.shouldUpdate = shouldUpdate;
     }
     public void run() {
         ThreadHelper.checkAsyncExec(
@@ -40,7 +44,7 @@ public class TableUpdater implements Runnable {
                     int index = 0;
                     for(TodoItem t : todoList.todoList){
                         index++;
-                        new TableRow(table, index, t);
+                        new TableRow(table, index, t, todoList, shouldUpdate);
                     }
                 }
             }
