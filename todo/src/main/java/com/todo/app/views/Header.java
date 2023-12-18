@@ -1,5 +1,7 @@
 package com.todo.app.views;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Font;
@@ -13,15 +15,17 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.todo.app.TodoApp;
+import com.todo.app.events.SavingBtnAdapter;
+import com.todo.app.utils.TodoList;
 
 public class Header {
     
     public Button todoSavingBtn;
     public StyledText todoText;
     
-    private Shell shell;
+    private final Shell shell;
     
-    public Header(Shell shell){
+    public Header(Shell shell, TodoList todoList, AtomicBoolean shouldUpdate){
         this.shell = shell;
 
         Composite c1 = new Composite(shell, SWT.BORDER);
@@ -72,5 +76,10 @@ public class Header {
         Image img = new Image(shell.getDisplay(), 
                               TodoApp.class.getResourceAsStream("resources/"+"pencil.png"));
         todoSavingBtn.setImage(img);
+
+        todoSavingBtn.addSelectionListener(
+            new SavingBtnAdapter(todoText,
+                                 todoList,
+                                 shouldUpdate));
     }
 }
