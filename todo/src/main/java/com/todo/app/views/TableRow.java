@@ -1,5 +1,7 @@
 package com.todo.app.views;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.graphics.Image;
@@ -9,12 +11,14 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
 import com.todo.app.TodoApp;
+import com.todo.app.events.DelTodoBtnAdapter;
 import com.todo.app.events.DoneTodoBtnAdapter;
 import com.todo.app.utils.TodoItem;
+import com.todo.app.utils.TodoList;
 
 public class TableRow {
 
-    public TableRow(Table table, int index, TodoItem tItem){
+    public TableRow(Table table, int index, TodoItem tItem, TodoList todoList, AtomicBoolean shouldUpdate){
         TableItem item = new TableItem(table, SWT.CENTER);
         
         item.setText(0, "" + index);
@@ -45,5 +49,7 @@ public class TableRow {
         delTodoBtn.setImage(img);
         // Set the editor for the first column in the row
         delTodoEditor.setEditor(delTodoBtn, item, 3);
+        delTodoBtn.setData("ITEM_INDEX", index-1);
+        delTodoBtn.addSelectionListener(new DelTodoBtnAdapter(todoList, shouldUpdate));
     }
 }

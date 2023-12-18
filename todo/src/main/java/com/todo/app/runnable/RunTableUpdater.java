@@ -35,7 +35,7 @@ public class RunTableUpdater implements Runnable {
                 continue;
             }
             shouldUpdate.set(false);
-            new Thread(new TableUpdater(display, table, todoList)).start();
+            new Thread(new TableUpdater(display, table, todoList, shouldUpdate)).start();
         }
     }
 }
