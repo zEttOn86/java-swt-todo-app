@@ -15,18 +15,21 @@ import com.todo.app.utils.TodoList;
 import com.todo.app.views.TableRow;
 
 public class TableUpdater implements Runnable {
-    private Display display;
+
     private Table table;
     private TodoList todoList;
     private final AtomicBoolean shouldUpdate;
 
-    public TableUpdater(Display display, Table table, TodoList todoList, AtomicBoolean shouldUpdate){
-        this.display = display;
+    public TableUpdater(Table table, TodoList todoList, AtomicBoolean shouldUpdate){
         this.table = table;
         this.todoList = todoList;
         this.shouldUpdate = shouldUpdate;
     }
     public void run() {
+        Display display = Display.getCurrent();
+        if (display == null) {
+            display = Display.getDefault();
+        }
         ThreadHelper.checkAsyncExec(
             display,
             new Runnable(){
