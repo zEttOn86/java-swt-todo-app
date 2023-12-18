@@ -16,20 +16,19 @@ import com.todo.app.views.TableRow;
 
 public class DrawTable implements Runnable {
 
-    private Table table;
-    private TodoList todoList;
+    private final Table table;
+    private final TodoList todoList;
     private final AtomicBoolean shouldUpdate;
+    private final Display display;
 
-    public DrawTable(Table table, TodoList todoList, AtomicBoolean shouldUpdate){
+    public DrawTable(Display display, Table table, TodoList todoList, AtomicBoolean shouldUpdate){
         this.table = table;
         this.todoList = todoList;
         this.shouldUpdate = shouldUpdate;
+        this.display = display;
     }
     public void run() {
-        Display display = Display.getCurrent();
-        if (display == null) {
-            display = Display.getDefault();
-        }
+
         ThreadHelper.checkAsyncExec(
             display,
             new Runnable(){
