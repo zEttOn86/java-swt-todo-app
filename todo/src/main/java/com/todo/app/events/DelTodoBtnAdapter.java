@@ -23,8 +23,8 @@ public class DelTodoBtnAdapter extends SelectionAdapter {
         Button btn = (Button) event.getSource();
 
         int index = (int) btn.getData("ITEM_INDEX");
-        System.out.println(index);
         todoList.remove(index);
+
         shouldUpdate.set(true);
     }
 }

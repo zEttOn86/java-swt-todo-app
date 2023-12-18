@@ -18,10 +18,11 @@ import com.todo.app.utils.TodoList;
 
 public class TableRow {
 
-    public TableRow(Table table, int index, TodoItem tItem, TodoList todoList, AtomicBoolean shouldUpdate){
+    public TableRow(Table table, TodoList todoList, int index, AtomicBoolean shouldUpdate){
         TableItem item = new TableItem(table, SWT.CENTER);
-        
-        item.setText(0, "" + index);
+        TodoItem tItem = todoList.getItem(index);
+
+        item.setText(0, "" + (index+1));
         item.setText(1, tItem.getTodoTxt());
         
         // Create the editor and button
@@ -35,6 +36,7 @@ public class TableRow {
         // Set the editor for the first column in the row
         doneTodoEditor.setEditor(doneTodoBtn, item, 2);
         doneTodoBtn.addSelectionListener(new DoneTodoBtnAdapter(item));
+        doneTodoBtn.setData("ITEM_INDEX", index);
 
         // Create the editor and button
         TableEditor delTodoEditor = new TableEditor(table);
@@ -49,7 +51,7 @@ public class TableRow {
         delTodoBtn.setImage(img);
         // Set the editor for the first column in the row
         delTodoEditor.setEditor(delTodoBtn, item, 3);
-        delTodoBtn.setData("ITEM_INDEX", index-1);
+        delTodoBtn.setData("ITEM_INDEX", index);
         delTodoBtn.addSelectionListener(new DelTodoBtnAdapter(todoList, shouldUpdate));
     }
 }
