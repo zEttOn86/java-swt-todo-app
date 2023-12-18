@@ -14,13 +14,13 @@ import com.todo.app.utils.TodoItem;
 import com.todo.app.utils.TodoList;
 import com.todo.app.views.TableRow;
 
-public class TableUpdater implements Runnable {
+public class DrawTable implements Runnable {
 
     private Table table;
     private TodoList todoList;
     private final AtomicBoolean shouldUpdate;
 
-    public TableUpdater(Table table, TodoList todoList, AtomicBoolean shouldUpdate){
+    public DrawTable(Table table, TodoList todoList, AtomicBoolean shouldUpdate){
         this.table = table;
         this.todoList = todoList;
         this.shouldUpdate = shouldUpdate;

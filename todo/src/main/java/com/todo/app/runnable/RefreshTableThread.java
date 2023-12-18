@@ -3,29 +3,28 @@ package com.todo.app.runnable;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
 import com.todo.app.utils.TodoList;
 
-public class RunTableUpdater implements Runnable {
+public class RefreshTableThread implements Runnable {
     private Table table;
     private TodoList todoList;
     private AtomicBoolean shouldUpdate;
+    private final Display display;
 
-    public RunTableUpdater(Table table,
+    public RefreshTableThread(Table table,
                            TodoList todoList,
                            AtomicBoolean shouldUpdate){
         this.table = table;
         this.todoList = todoList;
         this.shouldUpdate = shouldUpdate;
+        this.display = table.getShell().getDisplay();
     }
 
     public void run(){
         while(true){
-            Display display = Display.getCurrent();
-            if (display == null) {
-                display = Display.getDefault();
-            }
 
             if(display.isDisposed()){
                 return; 
@@ -36,7 +35,7 @@ public class RunTableUpdater implements Runnable {
                 continue;
             }
             shouldUpdate.set(false);
-            new Thread(new TableUpdater(table, todoList, shouldUpdate)).start();
+            new Thread(new DrawTable(table, todoList, shouldUpdate)).start();
         }
     }
 }
