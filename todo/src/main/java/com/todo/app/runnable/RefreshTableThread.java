@@ -35,7 +35,7 @@ public class RefreshTableThread implements Runnable {
                 continue;
             }
             shouldUpdate.set(false);
-            new Thread(new DrawTable(table, todoList, shouldUpdate)).start();
+            new Thread(new DrawTable(display, table, todoList, shouldUpdate)).start();
         }
     }
 }
