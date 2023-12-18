@@ -57,8 +57,7 @@ public class TodoApp
                                  todoList,
                                  shouldUpdate));
 
-        new Thread(new RunTableUpdater(display, 
-                                       body.table,
+        new Thread(new RunTableUpdater(body.table,
                                        todoList,
                                        shouldUpdate)).start();
         shell.open();
