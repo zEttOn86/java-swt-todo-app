@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.todo.app.TodoApp;
 import com.todo.app.events.SavingBtnAdapter;
+import com.todo.app.events.TodoTextKeyAdapter;
 import com.todo.app.utils.TodoList;
 
 public class Header {
@@ -62,6 +63,8 @@ public class Header {
                                 5,
                                 1);
         todoText.setLayoutData(gridData);
+        todoText.addKeyListener(new TodoTextKeyAdapter(todoList, 
+                                                        shouldUpdate));
 
         todoSavingBtn = new Button(c1, SWT.PUSH | SWT.CENTER);
         gridData = new GridData(SWT.LEFT, //horizontalAlignment
