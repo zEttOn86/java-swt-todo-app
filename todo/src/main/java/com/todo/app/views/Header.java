@@ -1,5 +1,6 @@
 package com.todo.app.views;
 
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.swt.SWT;
@@ -26,7 +27,7 @@ public class Header {
     
     private final Shell shell;
     
-    public Header(Shell shell, TodoList todoList, AtomicBoolean shouldUpdate){
+    public Header(Shell shell, TodoList todoList, AtomicBoolean shouldUpdate, ResourceBundle messages){
         this.shell = shell;
 
         Composite c1 = new Composite(shell, SWT.BORDER);
@@ -40,7 +41,7 @@ public class Header {
         c1.setLayoutData(gridData);
 
         Label titleLabel = new Label(c1, SWT.LEFT | SWT.BORDER);
-        titleLabel.setText("TODOリスト");
+        titleLabel.setText(messages.getString("titleLabel_str"));
         Font titleFont = new Font(titleLabel.getDisplay(), 
                                   new FontData("Meiryo", 30, SWT.BOLD));
         titleLabel.setFont(titleFont);

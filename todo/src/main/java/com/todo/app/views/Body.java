@@ -1,7 +1,10 @@
 package com.todo.app.views;
 
+import java.util.ResourceBundle;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.graphics.Resource;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -12,7 +15,7 @@ import org.eclipse.swt.widgets.TableColumn;
 public class Body {
     public Table table;
 
-    public Body(Shell shell){
+    public Body(Shell shell, ResourceBundle messages){
         ScrolledComposite sc = new ScrolledComposite(shell, SWT.BORDER | SWT.V_SCROLL);
         sc.setExpandHorizontal(true);
         sc.setExpandVertical(true);
@@ -36,11 +39,11 @@ public class Body {
         //TODO: 動的に列の幅を変えたい。
         //参考：https://okwave.jp/qa/q2188444.html
         TableColumn col1 = new TableColumn(table, SWT.LEFT);
-        col1.setText("No");
+        col1.setText(messages.getString("col1_str"));
         col1.setWidth(100);
 
         TableColumn col2 = new TableColumn(table, SWT.LEFT);
-        col2.setText("やること");
+        col2.setText(messages.getString("col2_str"));
         col2.setWidth(700);
 
         TableColumn col3 = new TableColumn(table, SWT.CENTER);
