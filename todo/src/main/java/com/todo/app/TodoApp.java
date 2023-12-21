@@ -1,5 +1,7 @@
 package com.todo.app;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.swt.layout.GridLayout;
@@ -21,6 +23,7 @@ public class TodoApp
 
     private TodoList todoList = new TodoList();
     private AtomicBoolean shouldUpdate = new AtomicBoolean(false);
+    // private final ResourceBundle messages; 
 
     public static void main(String[] args) {
 
@@ -43,14 +46,19 @@ public class TodoApp
         Shell shell = new Shell(display);
         shell.setLayout(new GridLayout(1, false)); // makeColumnsEqualWidth: 列をすべて同じ幅にするかどうか、trueの場合同じ
 
+        Locale currentLocale = Locale.getDefault();
+        System.out.println(currentLocale);
+        ResourceBundle messages = ResourceBundle.getBundle("com.todo.app.resources.MessagesBundle", 
+                                                           currentLocale);
+
         // Set title
-        shell.setText("TODOリスト");
+        shell.setText(messages.getString("shellTitle_str"));
 
         // Header composite
-        Header header = new Header(shell, todoList, shouldUpdate);
+        Header header = new Header(shell, todoList, shouldUpdate, messages);
 
         // Body composite
-        Body body = new Body(shell);
+        Body body = new Body(shell, messages);
 
         new Thread(new RefreshTableThread(body.table,
                                           todoList,
