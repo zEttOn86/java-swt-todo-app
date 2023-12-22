@@ -4,6 +4,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
@@ -24,7 +26,18 @@ public class TableRow {
 
         item.setText(0, "" + (index+1));
         item.setText(1, tItem.getTodoTxt());
-        
+
+        Font f = item.getFont(1);
+        FontData fd = f.getFontData()[0];
+        if (tItem.getIsDone()){
+            fd.data.lfStrikeOut = 1;
+        }
+        else{
+            fd.data.lfStrikeOut = 0;
+        }
+        Font font = new Font(table.getDisplay(), fd);
+        item.setFont(1, font);
+
         // Create the editor and button
         TableEditor doneTodoEditor = new TableEditor(table);
         Button doneTodoBtn = new Button(table, SWT.CHECK);
@@ -35,8 +48,9 @@ public class TableRow {
         doneTodoEditor.minimumHeight = doneBtnSize.y;
         // Set the editor for the first column in the row
         doneTodoEditor.setEditor(doneTodoBtn, item, 2);
-        doneTodoBtn.addSelectionListener(new DoneTodoBtnAdapter(item));
+        doneTodoBtn.addSelectionListener(new DoneTodoBtnAdapter(item, todoList, shouldUpdate));
         doneTodoBtn.setData("ITEM_INDEX", index);
+        doneTodoBtn.setSelection(tItem.getIsDone());
 
         // Create the editor and button
         TableEditor delTodoEditor = new TableEditor(table);
