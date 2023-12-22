@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
@@ -11,6 +12,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.todo.app.events.SavingBtnAdapter;
 import com.todo.app.runnable.RefreshTableThread;
+import com.todo.app.utils.Constants;
 import com.todo.app.utils.TodoList;
 import com.todo.app.views.Body;
 import com.todo.app.views.Header;
@@ -44,11 +46,12 @@ public class TodoApp
     private Shell open(Display display){
         this.todoList = new TodoList();
 
-        Shell shell = new Shell(display);
+        Shell shell = new Shell(display, SWT.TITLE|SWT.MIN|SWT.MAX);
         shell.setLayout(new GridLayout(1, false)); // makeColumnsEqualWidth: 列をすべて同じ幅にするかどうか、trueの場合同じ
         Image img = new Image(display, 
                               TodoApp.class.getResourceAsStream("resources/"+"outline_done_all_black_24dp.png"));
         shell.setImage(img);
+        shell.setBackground(Constants.bkgColor);
 
         Locale currentLocale = Locale.getDefault();
         ResourceBundle messages = ResourceBundle.getBundle("com.todo.app.resources.MessagesBundle", 

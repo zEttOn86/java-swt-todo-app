@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.todo.app.TodoApp;
 import com.todo.app.events.SavingBtnAdapter;
 import com.todo.app.events.TodoTextKeyAdapter;
+import com.todo.app.utils.Constants;
 import com.todo.app.utils.TodoList;
 
 public class Header {
@@ -30,7 +31,7 @@ public class Header {
     public Header(Shell shell, TodoList todoList, AtomicBoolean shouldUpdate, ResourceBundle messages){
         this.shell = shell;
 
-        Composite c1 = new Composite(shell, SWT.BORDER);
+        Composite c1 = new Composite(shell, SWT.NONE);
         c1.setLayout(new GridLayout(8, true));
         GridData gridData = new GridData(GridData.FILL,
                                          GridData.FILL,
@@ -39,8 +40,9 @@ public class Header {
                                          1,
                                          1);
         c1.setLayoutData(gridData);
+        c1.setBackground(Constants.bkgColor);
 
-        Label titleLabel = new Label(c1, SWT.LEFT | SWT.BORDER);
+        Label titleLabel = new Label(c1, SWT.LEFT);
         titleLabel.setText(messages.getString("titleLabel_str"));
         Font titleFont = new Font(titleLabel.getDisplay(), 
                                   new FontData("Meiryo", 30, SWT.BOLD));
@@ -52,6 +54,7 @@ public class Header {
                                 8,
                                 1);
         titleLabel.setLayoutData(gridData);
+        titleLabel.setBackground(Constants.bkgColor);
 
         todoText = new StyledText(c1, SWT.SINGLE | SWT.BORDER);
         Font todoFont = new Font(todoText.getDisplay(),
