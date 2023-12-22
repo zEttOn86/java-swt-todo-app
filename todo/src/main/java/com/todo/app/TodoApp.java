@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -45,9 +46,11 @@ public class TodoApp
 
         Shell shell = new Shell(display);
         shell.setLayout(new GridLayout(1, false)); // makeColumnsEqualWidth: 列をすべて同じ幅にするかどうか、trueの場合同じ
+        Image img = new Image(display, 
+                              TodoApp.class.getResourceAsStream("resources/"+"outline_done_all_black_24dp.png"));
+        shell.setImage(img);
 
         Locale currentLocale = Locale.getDefault();
-        System.out.println(currentLocale);
         ResourceBundle messages = ResourceBundle.getBundle("com.todo.app.resources.MessagesBundle", 
                                                            currentLocale);
 
