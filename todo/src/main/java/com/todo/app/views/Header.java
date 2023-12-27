@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.todo.app.TodoApp;
 import com.todo.app.events.SavingBtnAdapter;
 import com.todo.app.events.TodoTextKeyAdapter;
-import com.todo.app.utils.Constants;
+import com.todo.app.resources.Constants;
 import com.todo.app.utils.TodoList;
 
 public class Header {

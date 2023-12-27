@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.todo.app.utils.Constants;
+import com.todo.app.resources.Constants;
 
 public class Body {
     public Table table;
