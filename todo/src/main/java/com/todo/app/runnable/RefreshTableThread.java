@@ -1,11 +1,16 @@
 package com.todo.app.runnable;
 
+import java.io.FileWriter;
+import java.io.Writer;
+import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
+import com.google.gson.Gson;
+import com.todo.app.resources.Constants;
 import com.todo.app.utils.TodoList;
 
 public class RefreshTableThread implements Runnable {
@@ -36,6 +41,21 @@ public class RefreshTableThread implements Runnable {
             }
             shouldUpdate.set(false);
             new Thread(new DrawTable(display, table, todoList, shouldUpdate)).start();
+
+            //create a write object for the file
+            try(Writer writerObject = new FileWriter(Constants.todoFilePath)){
+                
+                Gson gson = new Gson();
+                /*
+                * Use the toJson method and specify
+                * the writer and the list we want to write
+                */
+                gson.toJson(todoList, writerObject);
+                
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+            
         }
     }
 }

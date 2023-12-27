@@ -1,5 +1,6 @@
 package com.todo.app;
 
+import java.io.FileWriter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -10,9 +11,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.google.gson.Gson;
 import com.todo.app.events.SavingBtnAdapter;
+import com.todo.app.resources.Constants;
 import com.todo.app.runnable.RefreshTableThread;
-import com.todo.app.utils.Constants;
 import com.todo.app.utils.TodoList;
 import com.todo.app.views.Body;
 import com.todo.app.views.Header;
