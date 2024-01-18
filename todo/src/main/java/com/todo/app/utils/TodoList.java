@@ -27,4 +27,7 @@ public class TodoList {
     public TodoItem getItem(int index){
         return todoList.get(index);
     }
+    public void clear(){
+        todoList.clear();
+    }
 }

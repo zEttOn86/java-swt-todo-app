@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.todo.app.resources.Constants;
 import com.todo.app.utils.TodoList;
 
@@ -45,7 +46,7 @@ public class RefreshTableThread implements Runnable {
             //create a write object for the file
             try(Writer writerObject = new FileWriter(Constants.todoFilePath)){
                 
-                Gson gson = new Gson();
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 /*
                 * Use the toJson method and specify
                 * the writer and the list we want to write
